@@ -1,0 +1,158 @@
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+<div style="min-width: 1000px;">
+  <div class="navbar">
+    <div class="navitem navitemActivated" id="Home" (click)="displayPannel(&quot;home&quot;,&quot;Home&quot;)"><p>Home<br><i class="bi bi-house-fill navitem_icon"></i></p></div>
+    <div class="navitem" id="AboutUs" (click)="displayPannel(&quot;aboutUs&quot;,&quot;AboutUs&quot;)"><p>About Us<br><i class="bi bi-layout-text-window-reverse navitem_icon"></i></p></div>
+    <div class="navitem" id="Gallery" (click)="displayPannel(&quot;gallery&quot;,&quot;Gallery&quot;);getDescription();changeImageClick(galleryList[0]);"><p>Gallery<br><i class="bi bi-image-fill navitem_icon"></i></p></div>
+    <div class="navitem" id="ClubRules" (click)="displayPannel(&quot;clubRules&quot;,&quot;ClubRules&quot;)"><p>Club Rules<br><i class="bi bi-info-circle-fill navitem_icon"></i></p></div>
+    <div class="navitem" id="ContactUs" (click)="displayPannel(&quot;contactUs&quot;,&quot;ContactUs&quot;)"><p>Contact Us<br><i class="bi bi-envelope-fill navitem_icon"></i></p></div>
+  </div>
+</div>
+<div>
+  <!-- Contact Us -->
+  <div id="contactUs" class="contactUs">
+    <div id="leftContactUs" class="leftContactUs">
+      <div style="width:100%;padding-top: 20px;">
+        <label for="fisrtname">Firstname:</label>
+        <input type="text" id="firstname" placeholder="Firstname" [(ngModel)]="firstname">
+      </div>
+      <br>
+      <div style="width:100%;margin-top: 20px;">
+        <label for="lstname">Lastname:</label>
+        <input type="textfield" id="lastname" placeholder="Lastname" [(ngModel)]="lastname">
+      </div>
+      <br>
+      <div style="width:100%;margin-top: 20px;">
+        <label for="email">Email:</label>
+        <input type="email" id="email" placeholder="Email" [(ngModel)]="email">
+      </div>
+      <br>
+      <div style="position:absolute;bottom:10px;width:85%;margin-left:5%;margin-right:10%;margin-right:;margin-top: 20px;color:#292618;border: 2px solid #9c8e52;padding: 2px 10px 2px; border-radius: 10px;filter: brightness(85%);background-color: inherit;">
+        <p>Please be respectufull towards the club. You might not hear back from us for a while, for we receive a number of emails, weekly, that we read personally. We thank you for your patience.</p>
+      </div>
+    </div>
+    <div id="rightContactUs" class="rightContactUs">
+      <div style="width:100%;margin-top: 20px;">
+        <label>Subject:</label>
+        <input type="textfield" id="subject" style="width:80%;margin-left: 0; margin-right: 5%;background-color: #FFFFEC;color: #5E4A02;text-align: left;" [(ngModel)]="emailSubject" autocomplete="off">
+      </div>
+      <textarea name="subject" [(ngModel)]="emailBody">{{emailBody}}</textarea>
+      <div style="width: 100%;text-align: right;margin-top: 10px;">
+        <button (click)="clearEmailBody()">Clear</button>
+        <button style="margin-right: 5%;" (click)="sendMessage()">Send <i class="bi bi-envelope-fill"></i></button>
+      </div>
+    </div>
+  </div>
+  <!-- Club Rules -->
+  <div id="clubRules" class="clubRules">
+    <div *ngIf="ruleDiv>1" (click)="changePage(&quot;-&quot;)" class="arrowClass" style="float: left;">
+      <p style="font-size:1.5vw;display: table-cell;vertical-align: middle;text-align: left;"><i class="bi bi-arrow-left-circle-fill"></i></p>
+    </div>
+    <div *ngIf="ruleDiv<=1" class="arrowFillerClass" style="float: left;">
+      <p style="font-size:1.5vw;display: table-cell;vertical-align: middle;text-align: left;"></p>
+    </div>
+    <div style="width:90%;display: inline-block;">
+      <h1 style="width: 100%;margin-top: 0;background-color: #292618;text-align: center; color: #fff3bd;font-family: Arial ;border: 3px solid #fff3bd; box-sizing: border-box;-moz-box-sizing: border-box;-webkit-box-sizing: border-box;">STOHOS RULE BOOK</h1>
+      <div style="width:100%;">
+        <div style="width:49%;float:left;display: inline-block;padding-left: 2%;margin-top: 0;margin-bottom: 0;">
+          <div style="display:inline-block;" *ngFor="let rule of ruleSet; index as i;" style="width: 100%;">
+              <p id="{{rule}}" class="clubRulesPara" style="max-width: 90%;padding-left: 3%;padding-right: 3%;color: #fff3bd;border-right: 4px solid #fff3bd;border-left: 4px solid #fff3bd;background-color: #9c8e52;" *ngIf="i<(ruleDiv+3) && i>=ruleDiv">{{i+1}}) {{rule}}</p>
+          </div>
+        </div>
+        <div style="width:49%;float: right;display: inline-block;padding-right: 0;margin-top: 0;margin-bottom: 0;">
+          <div style="display:inline-block;" *ngFor="let rule of ruleSet; index as i;" style="width: 100%;">
+              <p id="{{rule}}" class="clubRulesPara" style="max-width: 90%;padding-left: 3%;padding-right: 3%;color: #fff3bd;border-right: 4px solid #fff3bd;border-left: 4px solid #fff3bd;background-color: #9c8e52;" *ngIf="i<(ruleDiv+6) && i>=ruleDiv+3">{{i+1}}) {{rule}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="ruleDiv+6<ruleSet.length" (click)="changePage(&quot;+&quot;)" class="arrowClass" style="float: right;">
+      <p style="font-size:1.5vw;display: table-cell;vertical-align: middle;text-align: left;"><i class="bi bi-arrow-right-circle-fill"></i></p>
+    </div>
+    <div *ngIf="ruleDiv+6>ruleSet.length"  class="arrowFillerClass" style="float: right;">
+      <p style="font-size:1.5vw;display: table-cell;vertical-align: middle;text-align: left;"></p>
+    </div>
+  </div>
+  <!-- Gallery -->
+  <div id="gallery" class="gallery">
+    <div class="galleryLeft">
+      <div *ngFor="let photo of galleryList; index as i;">
+        <button id="{{photo}}" *ngIf="i==0" class="galleryItem galleryItemActivated" (click)="changeImageClick(photo)">{{photo.substring(0, photo.length-4)}}</button>
+        <button id="{{photo}}" *ngIf="i!=0" class="galleryItem" (click)="changeImageClick(photo)">{{photo.substring(0, photo.length-4)}}</button>
+      </div>
+    </div>
+    <div class="galleryRight">
+      <div class="arrowGalleryClass" style="float: left;" (click)="galleryArrow(&quot;-&quot;)"><p style="font-size:1.5vw;display: table-cell;vertical-align: middle;text-align: center;"><i class="bi bi-arrow-left-circle-fill"></i></p></div>
+      <div class="arrowGalleryClass" style="float: right;" (click)="galleryArrow(&quot;+&quot;)"><p style="font-size:1.5vw;display: table-cell;vertical-align: middle;text-align: center;"><i class="bi bi-arrow-right-circle-fill"></i></p></div>
+      <div style="position: relative;width: 90%;height: 100%;text-align: center;display: inline-block;float: left;">
+        <div style="width:100%;height: inherit;">
+          <img class="imageGallery" src="{{currentImage}}">
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- About Us -->
+  <div id="aboutUs" class="aboutUs">
+    <div style="width: 30%;height: 100%;display: inline-block;padding: 0;margin: 0;">
+      <div class="aboutItemContainer" style="height: 30%;position: relative;background-image: URL('./assets/aboutUs/Our Past.jpg');background-size: cover;" (click)="aboutUsPopUp('./assets/aboutUs/Our Past.jpg','Our Past')">
+        <p class="aboutItem">Our Past</p>
+      </div>
+      <div class="aboutItemContainer" style="height: 70%;position: relative;background-image: URL('./assets/aboutUs/Our Ethics.jpg');background-size: cover;" (click)="aboutUsPopUp('./assets/aboutUs/Our Ethics.jpg','Our Ethics')">
+        <p class="aboutItem">Our Ethics</p>
+      </div>
+    </div>
+    <div style="width: 40%;height: 100%;display: inline-block;">
+      <div class="aboutItemContainer" style="height: 30%;position: relative;background-image: URL('./assets/aboutUs/Our Present.jpg');background-size: cover;" (click)="aboutUsPopUp('./assets/aboutUs/Our Present.jpg','Our Present')">
+        <p class="aboutItem">Our Present</p>
+      </div>
+      <div class="aboutItemContainer" style="height: 35%;position: relative;background-image: URL('./assets/aboutUs/Gun Control.jpg');background-size: cover;" (click)="aboutUsPopUp('./assets/aboutUs/Gun Control.jpg','Gun Control')">
+        <p class="aboutItem">Gun Control</p>
+      </div>
+      <div class="aboutItemContainer" style="height: 35%;position: relative;background-image: URL('./assets/aboutUs/Dog Training.jpg');background-size: cover;" (click)="aboutUsPopUp('./assets/aboutUs/Dog Training.jpg','Dog Training')">
+        <p class="aboutItem">Dog Training</p>
+      </div>
+    </div>
+    <div style="width: 30%;height: 100%;display: inline-block;">
+      <div class="aboutItemContainer" style="height: 30%;position: relative;background-image: URL('./assets/aboutUs/Our Future.jpg');background-size: cover;" (click)="aboutUsPopUp('./assets/aboutUs/Our Future.jpg','Our Future')">
+        <p class="aboutItem">Our Future</p>
+      </div>
+      <div class="aboutItemContainer" style="height: 70%;position: relative;background-image: URL('./assets/aboutUs/Environment.jpg');background-size: cover;" (click)="aboutUsPopUp('./assets/aboutUs/Environment.jpg','Environment')">
+        <p class="aboutItem">Environment</p>
+      </div>
+    </div>
+  </div>
+  <div id="popUpContainer" style="transition: top 0.5s, bottom 0.5s; visibility: block; width: 25%; min-width: 350px; height: 500px;background-color: #fff3bd;box-shadow: 0 0 20px black; position: absolute;top: -520px;right: 37.5%;border-top-right-radius: 10px;border-bottom-left-radius: 10px;">
+    <div id="popUpPicture" style="width: 100%;height: 30%;background-color: black;top: 0;position: absolute;background-size: cover;border-top-right-radius: 10px;border-bottom: 3px solid #5E4A02;">
+      <p id="popUpTitle" style="color: #fff3bd; background-color: #5E4A02;width: 30%;text-align: center;margin-top: 0;border-bottom-right-radius: 10px;"></p>
+    </div>
+    <div style="max-height: 60%;width: 100%;overflow: scroll;position: absolute;top:30%;box-sizing: border-box; padding:20px;margin-top: 0;">
+      <p id="popUpText" style="color: #123317;"></p>
+    </div>
+  </div>
+  <div id="hideAboutUs" style="left: 0;position: absolute;width: 100vw;height: 100%;top: -100%;" (click)="aboutUsPopUpHide()"></div>
+  <!-- Home -->
+  <div id="home" class="home">
+    <div style="position: absolute; top:0;height: 15%; width: 100%;margin: 0;padding: 0;background-color: #5E4A02;text-align: center; color: #fff3bd;font-family: Arial ;border-bottom: 3px solid #fff3bd; box-sizing: border-box;-moz-box-sizing: border-box;-webkit-box-sizing: border-box;">
+      <h1 style="margin:0;">STOHOS SHOOTING CLUB</h1>
+      <p style="margin: 0;">Est. 1922</p>
+    </div>
+    <div style="width:100%;height: 85%;margin: 0;position: absolute;bottom: 0;">
+      <div class="homeItem" (click)="displayPannel(&quot;aboutUs&quot;,&quot;AboutUs&quot;)" style="background-image: URL('./assets/home/wood1.jpg');border-right: 1px solid #fff3bd;">
+        <h1><i class="bi bi-layout-text-window-reverse navitem_icon"></i></h1>
+        <p style="color: #fff3bd;-webkit-text-stroke-color: black;">Learn everything about us here!</p>
+      </div>
+      <div class="homeItem" (click)="displayPannel(&quot;gallery&quot;,&quot;Gallery&quot;);getDescription();changeImageClick(galleryList[0]);" style="background-image: URL('./assets/home/wood2.jpg');border-right: 1px solid #fff3bd;border-left: 1px solid #fff3bd;">
+        <h1><i class="bi bi-image-fill navitem_icon"></i></h1>
+        <p style="color: #fff3bd;-webkit-text-stroke-color: black;">See what we look like! Browse our pictures.</p>
+      </div>
+      <div class="homeItem" (click)="displayPannel(&quot;clubRules&quot;,&quot;ClubRules&quot;)" style="background-image: URL('./assets/home/wood3.jpg');border-right: 1px solid #fff3bd;border-left: 1px solid #fff3bd;">
+        <h1><i class="bi bi-info-circle-fill navitem_icon"></i></h1>
+        <p style="color: #fff3bd;-webkit-text-stroke-color: black;">Safety is our priority, inside and outside the range.</p>
+      </div>
+      <div class="homeItem" (click)="displayPannel(&quot;contactUs&quot;,&quot;ContactUs&quot;)" style="background-image: URL('./assets/home/wood4.jpg');border-left: 1px solid #fff3bd;">
+          <h1><i class="bi bi-envelope-fill navitem_icon"></i></h1>
+          <p style="color: #fff3bd;-webkit-text-stroke-color: black;">Always there for our members and friends!</p>
+      </div>
+    </div>
+  </div>
+</div>
