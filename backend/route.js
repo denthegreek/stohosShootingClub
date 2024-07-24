@@ -18,22 +18,22 @@ router.post('/email',(req, res, next)=>{
 	var transporter = nodemailer.createTransport({
 	  service: 'outlook',
 	  auth: {
-	    user: '************************',
-	    pass: '************************'
+	    user: 'dnikolas1993@outlook.com',
+	    pass: '070293Den!'
 	  }
 	});
 
 	var transporter2 = nodemailer.createTransport({
 	  service: 'outlook',
 	  auth: {
-	    user: '************************',
-	    pass: '************************'
+	    user: 'dnikolas1993@outlook.com',
+	    pass: '070293Den!'
 	  }
 	});
 
 	var mailOptions = {
-	  from: '************************',
-	  to: '************************',
+	  from: 'dnikolas1993@outlook.com',
+	  to: 'dnikolas1993@gmail.com',
 	  subject: atob(req.body["subject"]),
 	  text: 'Hello Stohos President,\n\nYou have received a message from '
 	  +req.body["firstname"]+" "
@@ -52,7 +52,7 @@ router.post('/email',(req, res, next)=>{
 		  else{
 		  	console.log("Email to Strohos has been sent successfully!")
 		  	var mailOptions2 = {
-			  from: '************************',
+			  from: 'dnikolas1993@outlook.com',
 			  to: req.body["email"],
 			  subject: 'Verification',
 			  text: 'Hello '+req.body["firstname"]+' '+req.body["lastname"]+',\n\nWe would like to inform you that your message towards Strohos Shooting Club, with subject \"'+atob(req.body["subject"])+'\", has been received.\nWe appreciate that you communicated with us and we will try to reply as soon as possible.'
@@ -72,7 +72,7 @@ router.post('/email',(req, res, next)=>{
 			timer2++;
 		  }
 		});
-	}
+	} 
 	timer++;
 
 	

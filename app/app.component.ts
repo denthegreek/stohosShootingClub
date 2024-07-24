@@ -80,7 +80,7 @@ export class AppComponent {
   getDescription(){
   	var xmlHttp = new XMLHttpRequest();
     let apiKey = 'your_api_key';
-  	xmlHttp.open( "GET", "http://192.168.1.53:8800/gallery", false ); // false for synchronous request
+  	xmlHttp.open( "GET", "http://localhost:8800/gallery", false ); // false for synchronous request
   	xmlHttp.send( null );
   	this.galleryList=JSON.parse(xmlHttp.responseText);
   	this.currentImage="./assets/shootingRange/"+this.galleryList[0];

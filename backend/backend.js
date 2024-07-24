@@ -58,7 +58,7 @@ app.get('/ip',(req,res)=>{
 
 app.listen(port,()=>{
 	console.log("Port:\t"+port)
-	console.log("Link:\t192.168.1.53:8000")
+	console.log("Link:\tlocalhost:8000")
 });
 
 

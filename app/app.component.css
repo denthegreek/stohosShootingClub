@@ -8,8 +8,10 @@
 	height:130px;
 	background-color: transparent;
 	user-select: none;
+	position:relative;
 }
 .navitem{
+	position:relative;
 	box-sizing: border-box;
 	-moz-box-sizing: border-box;
 	-webkit-box-sizing: border-box;
@@ -27,6 +29,16 @@
 	transition: color 0.25s, background-color 0.25s, font-size 0.25s, border-top 0.25s, filter 0.25s;
 	padding-bottom: 10px;
 }
+
+.navitem:first-child{
+	border-bottom-left-radius: 10px;
+}
+
+.navitem:last-child{
+	border-bottom-right-radius: 10px;
+}
+
+
 .navitem:hover{
 	color:#fff3bd;
 	background-color: #9c8e52;
@@ -62,7 +74,7 @@
 	border-radius: 10px;
 	height: 450px;
 	overflow: hidden;
-	min-width: 1000px;
+	
 	display: none;
 	transition: opacity 0.25s;
 	background-color: #123317;
@@ -156,7 +168,7 @@
 	height: 450px;
 	overflow-x: hidden;
 	overflow-y: hidden;
-	min-width: 1000px;
+	
 	display: none;
 	transition: opacity 0.25s;
 	background-color: #123317;
@@ -175,7 +187,7 @@
 .clubRulesPara{
     text-indent: 10px;
     display: block;
-    font-size: 1vw !important;
+    font-size: 0.9vw !important;
     min-height:10vh;
     word-wrap: break-word;
     transition: background 0.5s, border 0.5s, box-shadow 0.5s;
@@ -225,7 +237,7 @@
 	border-radius: 10px;
 	height: 450px;
 	overflow: hidden;
-	min-width: 1000px;
+	
 	display: none;
 	transition: opacity 0.25s;
 	background-color: transparent;
@@ -315,7 +327,7 @@
 	border-radius: 10px;
 	height: 450px;
 	overflow: hidden;
-	min-width: 1000px;
+	
 	display: none;
 	transition: opacity 0.25s;
 	background-color: #123317;
@@ -359,7 +371,7 @@
 	border-radius: 10px;
 	height: 450px;
 	overflow: hidden;
-	min-width: 1000px;
+	
 	display: block;
 	transition: opacity 0.25s;
 	background-color: #123317;
@@ -413,4 +425,17 @@
 	-webkit-text-stroke-width: 2px;
 	font-weight: bold;
 	font-family: arial;
+}
+
+#popUpContainer{
+	transition: top 0.5s ease 0s, bottom 0.5s ease 0s!important;
+	width: 25%; 
+	min-width: 350px; 
+	height: 500px; 
+	background-color: rgb(255, 243, 189); 
+	box-shadow: black 0px 0px 20px; 
+	position: absolute; top: 20%; 
+	right: 37.5%; 
+	border-top-right-radius: 10px; 
+	border-bottom-left-radius: 10px;
 }

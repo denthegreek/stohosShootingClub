@@ -4,7 +4,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { HttpHeaders } from '@angular/common/http';
 import { HttpClient } from '@angular/common/http';
 
-const urlPart:string="http://192.168.1.53:8800/api/email";
+const urlPart:string="http://localhost:8800/api/email";
 
 const httpOptions = {
   headers: new HttpHeaders({
